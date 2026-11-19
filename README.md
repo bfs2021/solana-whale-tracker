@@ -78,7 +78,7 @@ Options:
   --pools <n>       Pools to read: the token's deepest (default 3), or trending pools (default 5)
   --limit <n>       Trades to list (default 20)
   --wallets <n>     Wallets in each leaderboard (default 5)
-  --watch <sec>     Keep running and print new whale trades (minimum 20)
+  --watch <sec>     Keep running and print new whale trades (default 30, minimum 20)
   --json            Print trades and summary as JSON
   --help            Show this help
 

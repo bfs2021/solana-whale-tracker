@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { age, c, compact, footer, isAddress, main, pad, parseArgs, short, sleep, table, usd } from "../lib/core.js";
-import { findPools, loadTrades, summarize, trendingPools } from "../lib/whales.js";
+import { findPools, loadTrades, summarize, trendingPools, watchSeconds } from "../lib/whales.js";
 
 const HELP = `solana-whale-tracker: big buys and sells on any Solana token
 
@@ -13,7 +13,7 @@ Options:
   --pools <n>       Pools to read: the token's deepest (default 3), or trending pools (default 5)
   --limit <n>       Trades to list (default 20)
   --wallets <n>     Wallets in each leaderboard (default 5)
-  --watch <sec>     Keep running and print new whale trades (minimum 20)
+  --watch <sec>     Keep running and print new whale trades (default 30, minimum 20)
   --json            Print trades and summary as JSON
   --help            Show this help
 
@@ -29,7 +29,7 @@ main(async () => {
   const minUsd = Math.max(1, Number(args["min-usd"]) || 1000);
   const limit = Number(args.limit) || 20;
   const walletCount = Number(args.wallets) || 5;
-  const watch = args.watch ? Math.max(20, Number(args.watch) || 30) : 0;
+  const watch = watchSeconds(args.watch);
 
   let pools, title, single = null;
   if (mint) {
